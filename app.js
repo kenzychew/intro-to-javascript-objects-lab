@@ -22,8 +22,8 @@ const game = {
 //? Exercise 1
 //   console.dir(pokemon, { maxArrayLength: null })
 
-console.log(pokemon[58].name);
-console.log(game); // Exercise 2
+// console.log(pokemon[58].name);
+// console.log(game); // Exercise 2
 
 /*
 Exercise 3
@@ -34,7 +34,7 @@ Exercise 3
 Solve Exercise 3 here:
 */
 game.difficulty = "Med";
-console.log(game);
+// console.log(game);
 
 
 /*
@@ -45,8 +45,9 @@ Exercise 4
 
 Solve Exercise 4 here:
 */
-game.party.push(pokemon[6]);
-console.log(game);
+const starter = pokemon[0];
+game.party.push(starter);
+// console.log(game);
 
 /*
 Exercise 5
@@ -56,10 +57,10 @@ Exercise 5
 
 Solve Exercise 5 here:
 */
-game.party.push(pokemon[134]);
-game.party.push(pokemon[142]);
+game.party.push(pokemon[129]);
+game.party.push(pokemon[148]);
 game.party.push(pokemon[149]);
-console.log(game);
+// console.log(game.party);
 
 
 
@@ -77,7 +78,7 @@ game.gyms.forEach(gym => {
     }
 });
 
-console.log(game);
+// console.log(game.gyms);
 
 /*
 Exercise 7
@@ -96,6 +97,12 @@ More Hints: The existing starter Pokemon will be *replaced* in your party with t
 Solve Exercise 7 here:
 */
 
+const evolvedStarter = pokemon[1];
+
+game.party.splice(0, 1, evolvedStarter);
+
+// console.log(game.party);
+
 /*
 Exercise 8
 1. Print the name of each Pokémon in your party.
@@ -103,6 +110,9 @@ Exercise 8
 
 Solve Exercise 8 here:
 */
+game.party.forEach(pokemon => {
+  console.log(pokemon.name);
+});
 
 /*
 Exercise 9
@@ -112,6 +122,11 @@ Exercise 9
 
 Solve Exercise 9 here:
 */
+const allStarter = pokemon.filter(p => p.starter === true);
+allStarter.forEach(starter => {
+  console.log(starter.name);
+});
+
 /*
 Exercise 10
 Create a method called `catchPokemon` and add it to the `game` object. You should not need to edit the original game object directly. This method should:
@@ -123,6 +138,16 @@ After writing this method, call it and pass in a Pokemon object of your choice f
 
 Solve Exercise 10 here:
 */
+
+game.catchPokemon = function(pokemonObj) {
+  game.party.push(pokemonObj);
+};
+
+const chansey = pokemon[112];
+game.catchPokemon(chansey);
+// console.log(game.party);
+
+
 /*
 Exercise 11
 1. Copy the `catchPokemon` method that you just wrote above, and paste it below. Modify it so that it also decreases the number of pokeballs in your inventory each time you catch a Pokémon.
@@ -136,7 +161,18 @@ Also, log the `game.items` array to confirm that the pokeball quantity is being 
 Solve Exercise 11 here:
 */
 
+game.catchPokemon = function(pokemonObj) {
+  game.party.push(pokemonObj);
 
+  //update pokeballs
+  const pokeballs = game.items[2];
+  pokeballs.quantity -= 1;
+};
+
+const jolteon = pokemon[134];
+game.catchPokemon(jolteon);
+
+// console.log(game.party);
 /*
 Exercise 12
 1. Similar to Exercise 6, now complete gyms with a difficulty below 6. How will you approach this?
@@ -144,7 +180,13 @@ Exercise 12
 
 Solve Exercise 12 here:
 */
+game.gyms.forEach(gym => {
+  if (gym.difficulty < 6) {
+    gym.completed = true;
+  }
+});
 
+console.log(game.gyms);
 
 /*
 Exercise 13
@@ -168,6 +210,13 @@ For example, if five gym objects have a value of `true` on their `completed` pro
 
 Solve Exercise 13 here:
 */
+
+const gymTally = {
+  completed: 0,
+  incomplete: 0,
+};
+
+
 /*
 Exercise 14
 1. Add a `partyCount` method to `game` that counts the number of Pokémon in your party.
