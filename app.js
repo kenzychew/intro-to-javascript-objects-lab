@@ -22,7 +22,7 @@ const game = {
 //? Exercise 1
 //   console.dir(pokemon, { maxArrayLength: null })
 
-// console.log(pokemon[58].name);
+console.log(pokemon[58].name);
 // console.log(game); // Exercise 2
 
 /*
@@ -186,7 +186,7 @@ game.gyms.forEach(gym => {
   }
 });
 
-console.log(game.gyms);
+// console.log(game.gyms);
 
 /*
 Exercise 13
@@ -211,11 +211,25 @@ For example, if five gym objects have a value of `true` on their `completed` pro
 Solve Exercise 13 here:
 */
 
+game.gymStatus = function() {
+
 const gymTally = {
   completed: 0,
   incomplete: 0,
 };
 
+game.gyms.forEach(gym => {
+  if (gym.completed) {
+    gymTally.completed += 1;
+  } else {
+    gymTally.incomplete += 1;
+  }
+});
+
+console.log(gymTally);
+};
+
+game.gymStatus();
 
 /*
 Exercise 14
@@ -228,6 +242,11 @@ This method should:
 
 Solve Exercise 14 here:
 */
+game.partyCount = function() {
+  return game.party.length;
+};
+
+console.log(game.partyCount());
 /*
 Exercise 15
 1. Now, complete gyms with a difficulty below 8. Reflect on how this is similar to or different from the previous gym exercises.
@@ -235,6 +254,14 @@ Exercise 15
 
 Solve Exercise 15 here:
 */
+
+game.gyms.forEach(gym => {
+  if (gym.difficulty < 8) {
+    gym.completed = true;
+  }
+});
+
+// console.log(game.gyms);
 /*
 Exercise 16
 1. Log the entire `game` object to the console. Take a moment to review the changes you've made throughout the exercises.
@@ -243,3 +270,4 @@ Exercise 16
 Solve Exercise 16 here:
 */
 
+console.log(game);
